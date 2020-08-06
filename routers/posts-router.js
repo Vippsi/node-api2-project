@@ -5,6 +5,7 @@ const db = require('../data/db')
 router.get('/', (req, res) => {
     db.find()
         .then(posts => {
+            console.log(posts)
             res.status(200).json({data: posts})
         })
         .catch(err => {
@@ -14,11 +15,13 @@ router.get('/', (req, res) => {
 
 //Gets post by Id
 router.get('/:id', (req, res) => {
+    const id = Number(req.params.id)
     db.findById(req.params.id)
     .then((post) => {
-        if(post) {
-            res.status(200).json(post)
-        } else {
+        const foundId = post.find((p) => p.id === id)
+        if(foundId) {
+            res.status(200).json({data: post})
+        } else{
             res.status(404).json({message: "The post with the specified ID does not exist."})
         }
     })
@@ -29,10 +32,13 @@ router.get('/:id', (req, res) => {
 
 // Gets comments by post ID
 router.get('/:id/comments', (req, res) => {
-    db.findPostComments(req.params.id)
+    const post_id = Number(req.params.id)
+    db.findPostComments(post_id)
     .then(postComments => {
-        if(postComments) {
-            res.status(200).json(postComments)
+        // const foundId = postComments.find((p) => p.id === post_id)
+        console.log(postComments)
+        if(postComments.length > 0) {
+            res.status(200).json({data: postComments})
         } else {
             res.status(404).json({message: "The post with the specified ID does not exist."})
         }
