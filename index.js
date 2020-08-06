@@ -10,7 +10,8 @@ server.use(cors());
 
 server.get("/", (req, res) => {
   const message = process.env.MESSAGE;
-  res.send(`<h1>Server is running {message} </h1>`);
+  res.send(`<h1>Server is running </h1>`);
+  res.json({message: message})
 });
 
 server.use("/api/posts", postsRouter);
