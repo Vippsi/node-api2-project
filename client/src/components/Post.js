@@ -8,7 +8,7 @@ export const Post = ({ post, setChange }) => {
     const history = useHistory()
     const deletePost = e => {
         e.preventDefault()
-        axios.delete(`http://localhost:4000/api/posts/${post.id}`)
+        axios.delete(`https://nodeday4project.herokuapp.com/api/posts/${post.id}`)
         .then(res => {
             console.log(res)
             setChange(res.data)

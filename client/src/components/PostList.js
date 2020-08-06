@@ -7,7 +7,7 @@ export const PostList = () => {
   const [change, setChange] = useState()
 
   const getData = () => {
-    axios.get("http://localhost:4000/api/posts").then((res) => {
+    axios.get("https://nodeday4project.herokuapp.com/api/posts").then((res) => {
       setPosts(res.data.data);
     });
   };

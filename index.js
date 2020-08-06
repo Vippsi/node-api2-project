@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 const express = require('express')
 const cors = require('cors')
 const server = express()
@@ -7,6 +9,7 @@ server.use(express.json())
 server.use(cors())
 
 server.get('/', (req, res) => {
+    const message = process.env.MESSAGE 
     res.send(`<h1>Server is running</h1>`)
 })
 
